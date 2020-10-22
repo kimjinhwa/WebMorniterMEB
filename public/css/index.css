@@ -1,0 +1,161 @@
+.divHead {
+  width: 1450px;
+  background: white;
+  height: 100px;
+}
+div.left {
+  width: 1100px;
+  float: left;
+  box-sizing: border-box;
+  background: white;
+  background-color: lightblue;
+  text-align: center;
+  height: 100px;
+  border: 0px outset red;
+}
+div.right {
+  width: 350px;
+  float: left;
+  //align: "left";
+  box-sizing: border-box;
+  background: white;
+  //valign: center;
+  height: 100px;
+  border: 0px outset red;
+}
+div.divImage {
+  //border: 1px outset gray;
+  display: block;
+  height: 140px;
+  width: 70%;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  //float: left;
+  box-sizing: border-box;
+  background: white;
+  font-size: 25px;
+  //line-height:200%";
+}
+.sineimg {
+  width: 100%;
+  height: 90%;
+  vertical-align: baseline;
+}
+.imglogo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  height: 100px;
+  vertical-align: baseline;
+  height: 100px;
+}
+.vlabel {
+  display: block;
+  width: 350px;
+  border: 1px outset gray;
+  background-color: #deeeff;
+  margin: 2px 2px;
+  padding: 2px 20px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.converterdiv {
+  border: 0px outset red;
+  width: 500px;
+  height: 650px;
+  float: left;
+  font-size: 25px;
+  align: righ;
+}
+#menu {
+  margin-left: 5px;
+  border: 00px outset red;
+  background-color: white;
+  height: 650px;
+  width: 450px;
+  float: left;
+  font-size: 25px;
+  line-height: 200%
+    ";
+}
+.menudiv {
+  border: 0px outset red;
+  background-color:white;
+  height:650px;width:450px;
+  float:left;font-size:25px;
+  line-height:200%";
+}
+.footer {
+  margin-left: 5px;
+  border: 0px outset red;
+  width: 100%;
+  height: 100px;
+  float: left;
+  font-size: 25px;
+  align: righ;
+}
+.divButtonContainer {
+  position: relative;
+  border: 0px outset red;
+  width: 500px;
+  height: 80px;
+  border: 0px outset red;
+  font-size: 25px;
+}
+.Divbutton1 {
+  position: absolute;
+  margin-top: 20px;
+  top: 30%;
+  left: 50%;
+  margin-left: 10px;
+  transform: translate(-50%, -30%);
+  border: 0px outset red;
+}
+.button1 {
+  display: inline-block;
+  background-color: #4caf50;
+  padding: 16px 16px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 2px 2px;
+  cursor: pointer;
+}
+.disSelect {
+  margin: 4px 2px;
+  background-color: #4caf50;
+  font-size: 30px;
+  padding: 6px 16px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+td {
+  height: 60px;
+  padding: 2px 1px;
+}
+#detailTd {
+  height: 60px;
+  padding: 6px 16px;
+}
+#tdSum {
+  ivbutton1 {
+  height: 100px;
+  width: 300px;
+}
+.detailLabel {
+  font-size: 50px;
+  color: aliceblue;
+  background-color: #b4b9f3;
+  padding: 6px 16px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.detailSLabel {
+  padding: 16px 16px;
+  font-size: 60px;
+  color: aliceblue;
+  background-color: #b4b9f3;
+  padding: 26px 26px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

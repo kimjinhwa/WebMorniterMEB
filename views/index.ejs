@@ -3,39 +3,98 @@
 <html >
 <meta charset="utf-8">
 <style>
-div {
-  width: 100%;
-}
-.HeadDivLeft {
-  width: 50%;
-  float:left;
-  border: 5px outset red;
-  background-color: lightblue;    
-}
-div.HeadDivCenter {
-  width: 50%;
-  float:Center;
-  border: 5px outset red;
-  background-color: lightblue;    
-}
-div.HeadDivRight {
-  width: 50%;
-  float: right;
-  border: 5px outset red;
-  background-color: lightblue;    
-}
 </style>
 <head>
+	<link rel="stylesheet" href="public/css/index.css" >
+	<script src="public/js/grobalVar.js"></script>
+	<script src="public/js/index.js"></script>
 </head>
-<body>
+<body  onLoad='onBodyLoadIndexEvent()'>
+<div class="divHead">
+	<div class="left"><H1 align="center">염분차발전 전기충전 인프라 전력 모니터링 시스템</H1></div>
+	<div class="right" ><img class="imglogo" src="public/images/CompanyLogo.png" ></div>
+	
+</div>
+<hr style="position:absolute;boder:outset 5px black; background-color:black;color:orange;height:3px;width:1400px">
+<br>
+<p></p>
 
-<div >
-	<div class="HeadDivLeft"  ><H1 ">염분차발전 전기충전 인프라 전력 모니터링 시스템</H1></div>
-	<div class="HeadDivRight" ><img src="images/CompanyLogo.png" width=20%  height="20%"></div>
+<div id="menu" >
+	<table>
+	<tr> <td ></td> <td align="center">DC/DC Converter</td> </tr>
+	<tr> <td>RED1 </td> <td><label class="vlabel" id=lbl_Module1 >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
+	<tr> <td>RED2 </td> <td><label class="vlabel" id=lbl_Module2 >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
+	<tr> <td>RED3 </td> <td><label class="vlabel" id=lbl_Module3 >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
+	<tr> <td>RED4 </td> <td><label class="vlabel" id=lbl_Module4 >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
+	<tr> <td>RED5 </td> <td><label class="vlabel" id=lbl_Module5 >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
+	<tr> <td>RED6 </td> <td><label class="vlabel" id=lbl_Module6 >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
+	</table>
+	
 </div>
 
+<div class=converterdiv >
+	<div>
+		<div style="width: 200px;margin-left: 30%; ;">Voltage</div>
+		<div class="divImage" ><img class="sineimg" src="public/images/sine.png" > </div> 
+	</div>
+	<div>
+		<div style="width: 200px;margin-left: 30%; ">Current</div>
+		<div class="divImage" ><img class="sineimg" src="public/images/sine.png" ></div>
+	</div>
+	<div>
+		<div style="width: 200px;margin-left: 30%; ">Power</div>
+		<div class="divImage" ><img class="sineimg" src="public/images/sine.png" ></div>
+	</div>
+	<div class="divButtonContainer" >
+		<div class="Divbutton1">
+			<button class="button1" style="width:150px;">전 체</button> 
+			<button  class="button1" style="width:150px;">개 별</button> <br>
+			<button  class="button1" id=refreshTime style="width:311px;" onclick="changeReflashTime()">Div : 1 sec</button> 
+		</div>
+	</div>
+</div>
 
-  <p>js data : <%=data%></p>
-<button>sample</button>
+<div class=converterdiv >
+	<table style="margin-left: 50px;" >
+	<tr> <td align="center">DC/AC Inverter</td> </tr>
+	<tr height=60px> <td align="center"><label class="vlabel" id=lbl_acdc >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
+	</table>
+
+	<div>
+		<div style="width: 200px;margin-left: 30%; "><label id='sellblId' >Voltage & Current</label> </div>
+		<div class="divImage" ><img class="sineimg" src="public/images/sine.png" ></div>
+	</div>
+	<br>
+	<div class="divImage" ><img class="sineimg" src="public/images/sine.png" > </div>
+	<div class="divButtonContainer" >
+		<div class="Divbutton1">
+		<select id="option" class="disSelect" onchange="SelectChange()">
+		  <option value="PC">Power & Current</option>
+		  <option value="PV">Power & Voltage</option>
+		  <option value="VC" selected>Voltage & Current</option>
+		</select>
+		</div>
+	</div>
+	<div class="divButtonContainer" >
+		<div class="Divbutton1" style="width:340px;">
+			<button class="button1" id=btnConnection style="margin-left: 15px;width:150px;" onclick="onClickConnection()">Connection</button> 
+			<button  class="button1" style="width:150px;">Data Save</button> <br>
+		</div>
+	</div>
+</div>
+<div class=footer>
+<p>
+<hr style="position:absolute;boder:outset 5px black; background-color:black;color:orange;height:3px;width:1400px">
+</p><p style="margin-top: 40px;">
+<small ><small>Programed by IFTECH.,LTD.    ver:0.9.001 </small></small>
+<small style=" margin-left: 150px;" > <small>mvchkim@gmailcom</small></small>
+<small style=" margin-left: 150px;" > <small>tel:032-000-0000</small></small>
+</p>
+<script type="text/javascript">
+//var myData =  !{JSON.stringify(data)};
+</script>
+<!-- <p>js data : <%=data%></p>
+-->
+</div>
 </body>
 </html>
