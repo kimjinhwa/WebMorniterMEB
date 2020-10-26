@@ -1,6 +1,27 @@
 ﻿var reflashTime=500;
 var isConnectionButtonPressed;
+var Volpjs,Amppjs,Powpjs,AcDcVolpjs,AcDcAmppjs;
+var module_index=0;
+
+var requestURL="./jsonData";
+var request = new XMLHttpRequest();
+//var superHeroes ;
+function requestJSONData(){
+	request.open('GET', requestURL);
+	request.responseType = 'json';
+	request.send();
+}
+request.onload = function(){
+	UpsData= request.response;
+	setDatatoIndex();
+	setProcessingInstance();
+	if(isConnectionButtonPressed)
+		setTimeout(randomFillSampleData,reflashTime);
+};
+
 function randomFillSampleData(){
+	requestJSONData();
+	/*
 	UpsData.module_1.vol=355 + Math.random()*5;
 	UpsData.module_2.vol=355 + Math.random()*5;
 	UpsData.module_3.vol=355 + Math.random()*5;
@@ -25,10 +46,11 @@ function randomFillSampleData(){
 	UpsData.module_4.power= UpsData.module_4.vol*UpsData.module_4.amp;
 	UpsData.module_5.power= UpsData.module_5.vol*UpsData.module_5.amp;
 	UpsData.module_6.power= UpsData.module_6.vol*UpsData.module_6.amp;
-
 	setDatatoIndex();
+	setProcessingInstance();
 	if(isConnectionButtonPressed)
 		setTimeout(randomFillSampleData,reflashTime);
+	*/	
 }
 
 function setDatatoIndex(){
@@ -57,9 +79,12 @@ function setDatatoIndex(){
 }
 
 function onBodyLoadIndexEvent(){
+	
 	randomFillSampleData();
 	document.getElementById('refreshTime').innerHTML="Div : "+reflashTime/1000+ " sec";
 	isConnectionButtonPressed=false;
+	module_index=0;
+	requestJSONData();
 }
 function SelectChange()
 {
@@ -86,4 +111,35 @@ function onClickConnection(){
 		document.getElementById('btnConnection').innerHTML="Close";
 	}
 	randomFillSampleData();
+}
+function setProcessingInstance() {
+	var jData=JSON.stringify( UpsData);
+	Volpjs = Processing.getInstanceById("Volcanvasid");
+	Volpjs.SetupData(jData);
+	Volpjs.drawText(module_index,0,"Vol");//module 1~6, kind 0:vol, 1:amp 2: power
+
+	Amppjs = Processing.getInstanceById("Ampcanvasid");
+	Amppjs.SetupData(jData);
+	Amppjs.drawText(module_index,1,"Amp");//module 1~6, kind 0:vol, 1:amp 2: power
+
+	Powpjs = Processing.getInstanceById("Powcanvasid");
+	Powpjs.SetupData(jData);
+	Powpjs.drawText(module_index,2,"Pow");//module 1~6, kind 0:vol, 1:amp 2: power
+
+	AcDcVolpjs= Processing.getInstanceById("AcDcVolcanvasid");
+	AcDcVolpjs.SetupData(jData);
+	AcDcVolpjs.drawText(module_index,3,"AC/DC[V]");//module 1~6, kind 0:vol, 1:amp 2: power
+
+	AcDcAmppjs= Processing.getInstanceById("AcDcAmpcanvasid");
+	AcDcAmppjs.SetupData(jData);
+	AcDcAmppjs.drawText(module_index,3,"AC/DC[A]");//module 1~6, kind 0:vol, 1:amp 2: power
+	//AcDcAmppjs= Processing.getInstanceById("AcDcAmpcanvasid");
+	//AcDcAmppjs.drawText(module_index,4,"AC/DC[A]");//module 1~6, kind 0:vol, 1:amp 2: power
+}
+
+function changeModule(index){
+	module_index=index;
+	Volpjs.drawText(module_index,0,"Vol");//module 1~6, kind 0:vol, 1:amp 2: power
+	Amppjs.drawText(module_index,0,"Amp");//module 1~6, kind 0:vol, 1:amp 2: power
+	Powpjs.drawText(module_index,0,"Pow");//module 1~6, kind 0:vol, 1:amp 2: power
 }

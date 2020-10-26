@@ -1,5 +1,32 @@
-﻿function randomFillSampleData(){
-	
+﻿
+var reflashTime=500;
+var isConnectionButtonPressed;
+var Volpjs,Amppjs,Powpjs,AcDcVolpjs,AcDcAmppjs;
+var module_index=0;
+
+var requestURL="./jsonData";
+var request = new XMLHttpRequest();
+//var superHeroes ;
+function requestJSONData(){
+	request.open('GET', requestURL);
+	request.responseType = 'json';
+	request.send();
+}
+
+request.onload = function(){
+	UpsData= request.response;
+	setDatatoDetail();
+	setTimeout(randomFillSampleData,2000);
+	/*
+	setDatatoIndex();
+	setProcessingInstance();
+	if(isConnectionButtonPressed)
+		setTimeout(randomFillSampleData,reflashTime);
+	*/
+};
+function randomFillSampleData(){
+	requestJSONData();
+/*	
 	UpsData.module_1.vol=355 + Math.random()*5;
 	UpsData.module_2.vol=355 + Math.random()*5;
 	UpsData.module_3.vol=355 + Math.random()*5;
@@ -24,9 +51,9 @@
 	UpsData.module_4.power= UpsData.module_4.vol*UpsData.module_4.amp;
 	UpsData.module_5.power= UpsData.module_5.vol*UpsData.module_5.amp;
 	UpsData.module_6.power= UpsData.module_6.vol*UpsData.module_6.amp;
-
 	setDatatoDetail();
 	setTimeout(randomFillSampleData,2000);
+*/
 }
 function setDatatoDetail(){
 	(document.getElementById('lbl_vol_1')).innerHTML=(UpsData.module_1.vol.toFixed(1) +"V");

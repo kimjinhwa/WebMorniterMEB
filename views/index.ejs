@@ -8,12 +8,14 @@
 	<link rel="stylesheet" href="public/css/index.css" >
 	<script src="public/js/grobalVar.js"></script>
 	<script src="public/js/index.js"></script>
+	<script type="text/javascript" src="public/js/processing.js"></script>
 </head>
 <body  onLoad='onBodyLoadIndexEvent()'>
+
 <div class="divHead">
 	<div class="left"><H1 align="center">염분차발전 전기충전 인프라 전력 모니터링 시스템</H1></div>
-	<div class="right" ><img class="imglogo" src="public/images/CompanyLogo.png" ></div>
-	
+	<div class="right" > <img class="imglogo" src="public/images/CompanyLogo.png" >
+	</div>
 </div>
 <hr style="position:absolute;boder:outset 5px black; background-color:black;color:orange;height:3px;width:1400px">
 <br>
@@ -22,12 +24,12 @@
 <div id="menu" >
 	<table>
 	<tr> <td ></td> <td align="center">DC/DC Converter</td> </tr>
-	<tr> <td>RED1 </td> <td><label class="vlabel" id=lbl_Module1 >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
-	<tr> <td>RED2 </td> <td><label class="vlabel" id=lbl_Module2 >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
-	<tr> <td>RED3 </td> <td><label class="vlabel" id=lbl_Module3 >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
-	<tr> <td>RED4 </td> <td><label class="vlabel" id=lbl_Module4 >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
-	<tr> <td>RED5 </td> <td><label class="vlabel" id=lbl_Module5 >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
-	<tr> <td>RED6 </td> <td><label class="vlabel" id=lbl_Module6 >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
+	<tr> <td>RED1 </td> <td><label class="vlabel" id=lbl_Module1 onclick="changeModule(0)">V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
+	<tr> <td>RED2 </td> <td><label class="vlabel" id=lbl_Module2 onclick="changeModule(1)">V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
+	<tr> <td>RED3 </td> <td><label class="vlabel" id=lbl_Module3 onclick="changeModule(2)" >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
+	<tr> <td>RED4 </td> <td><label class="vlabel" id=lbl_Module4 onclick="changeModule(3)" >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
+	<tr> <td>RED5 </td> <td><label class="vlabel" id=lbl_Module5 onclick="changeModule(4)" >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
+	<tr> <td>RED6 </td> <td><label class="vlabel" id=lbl_Module6 onclick="changeModule(5)" >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
 	</table>
 	
 </div>
@@ -35,15 +37,20 @@
 <div class=converterdiv >
 	<div>
 		<div style="width: 200px;margin-left: 30%; ;">Voltage</div>
-		<div class="divImage" ><img class="sineimg" src="public/images/sine.png" > </div> 
+		<div class="divImage" >
+			<canvas id="Volcanvasid" data-processing-sources="public/js/drawGraph.pde"/></canvas>
+		</div> 
 	</div>
 	<div>
 		<div style="width: 200px;margin-left: 30%; ">Current</div>
-		<div class="divImage" ><img class="sineimg" src="public/images/sine.png" ></div>
-	</div>
+		<div class="divImage" >
+			<canvas id="Ampcanvasid" data-processing-sources="public/js/drawGraph.pde"/></canvas> </div> 
+		</div>
 	<div>
 		<div style="width: 200px;margin-left: 30%; ">Power</div>
-		<div class="divImage" ><img class="sineimg" src="public/images/sine.png" ></div>
+		<div class="divImage" >
+			<canvas id="Powcanvasid" data-processing-sources="public/js/drawGraph.pde"/></canvas>
+		</div> 
 	</div>
 	<div class="divButtonContainer" >
 		<div class="Divbutton1">
@@ -62,10 +69,14 @@
 
 	<div>
 		<div style="width: 200px;margin-left: 30%; "><label id='sellblId' >Voltage & Current</label> </div>
-		<div class="divImage" ><img class="sineimg" src="public/images/sine.png" ></div>
+		<div class="divImage" >
+			<canvas id="AcDcVolcanvasid" data-processing-sources="public/js/drawGraph.pde"/></canvas>
+		</div>
 	</div>
 	<br>
-	<div class="divImage" ><img class="sineimg" src="public/images/sine.png" > </div>
+	<div class="divImage" >
+			<canvas id="AcDcAmpcanvasid" data-processing-sources="public/js/drawGraph.pde"/></canvas>
+	</div>
 	<div class="divButtonContainer" >
 		<div class="Divbutton1">
 		<select id="option" class="disSelect" onchange="SelectChange()">
@@ -77,7 +88,7 @@
 	</div>
 	<div class="divButtonContainer" >
 		<div class="Divbutton1" style="width:340px;">
-			<button class="button1" id=btnConnection style="margin-left: 15px;width:150px;" onclick="onClickConnection()">Connection</button> 
+			<button class="button1" id="btnConnection" style="margin-left: 15px;width:150px;" onclick="onClickConnection()">Connection</button> 
 			<button  class="button1" style="width:150px;">Data Save</button> <br>
 		</div>
 	</div>
@@ -85,7 +96,7 @@
 <div class=footer>
 <p>
 <hr style="position:absolute;boder:outset 5px black; background-color:black;color:orange;height:3px;width:1400px">
-</p><p style="margin-top: 40px; ">
+</p><p style="margin-top: 40px;">
 <small ><small>Programed by IFTECH.,LTD.    ver:0.9.001 </small></small>
 <small style=" margin-left: 150px;" > <small>mvchkim@gmailcom</small></small>
 <small style=" margin-left: 150px;" > <small>tel:032-000-0000</small></small>
@@ -96,5 +107,7 @@
 <!-- <p>js data : <%=data%></p>
 -->
 </div>
+
+
 </body>
 </html>
