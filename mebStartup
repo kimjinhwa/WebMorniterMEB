@@ -1,0 +1,13 @@
+#!/bin/sh
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bon
+
+start(){
+	echo "Test Prog Started"
+}
+
+stop(){
+	pid=$(ps aux | grep $FILE_NAME | awk '{print $2}')
+
+}
+

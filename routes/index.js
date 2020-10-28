@@ -4,6 +4,7 @@
 //var UpsData = require( '../public/js/grobalVar.js');
 var express = require('express');
 var router = express.Router();
+var fs= require('fs');
 // for serial modbus
 var ModbusRTU = require('modbus-serial');
 var client = new ModbusRTU();
@@ -25,9 +26,86 @@ function write(){
 	client.writeRegisters(5,[0,0xffff])
 	.then(read);
 };
+function fillZero(width,str){
+	return str.length >= width ? str : new Array(width-str.length+1).join('0')+str;
+}
+function fileWrite(){
+	var filename = '/srv/ftp/'
+
+	var nowDate = new Date(Date.now());
+		filename += nowDate.getFullYear();
+		filename += fillZero(2,(nowDate.getMonth()+1).toString());
+		filename += fillZero(2,(nowDate.getDate().toString()));
+		filename += '.csv';
+
+	var strFileData ;
+		strFileData  = UpsData.module_1.vol+",";
+		strFileData += UpsData.module_1.amp+",";
+		strFileData += UpsData.module_1.power+",";
+		strFileData += UpsData.module_1.ovol+",";
+		strFileData += UpsData.module_1.oamp+",";
+		strFileData += UpsData.module_1.opower+","
+
+		strFileData += UpsData.module_2.vol+",";
+		strFileData += UpsData.module_2.amp+",";
+		strFileData += UpsData.module_2.power+",";
+		strFileData += UpsData.module_2.ovol+",";
+		strFileData += UpsData.module_2.oamp+",";
+		strFileData += UpsData.module_2.opower+","
+
+		strFileData += UpsData.module_3.vol+",";
+		strFileData += UpsData.module_3.amp+",";
+		strFileData += UpsData.module_3.power+",";
+		strFileData += UpsData.module_3.ovol+",";
+		strFileData += UpsData.module_3.oamp+",";
+		strFileData += UpsData.module_3.opower+","
+
+		strFileData += UpsData.module_4.vol+",";
+		strFileData += UpsData.module_4.amp+",";
+		strFileData += UpsData.module_4.power+",";
+		strFileData += UpsData.module_4.ovol+",";
+		strFileData += UpsData.module_4.oamp+",";
+		strFileData += UpsData.module_4.opower+","
+
+		strFileData += UpsData.module_5.vol+",";
+		strFileData += UpsData.module_5.amp+",";
+		strFileData += UpsData.module_5.power+",";
+		strFileData += UpsData.module_5.ovol+",";
+		strFileData += UpsData.module_5.oamp+",";
+		strFileData += UpsData.module_5.opower+","
+
+		strFileData += UpsData.module_6.vol+",";
+		strFileData += UpsData.module_6.amp+",";
+		strFileData += UpsData.module_6.power+",";
+		strFileData += UpsData.module_6.ovol+",";
+		strFileData += UpsData.module_6.oamp+",";
+		strFileData += UpsData.module_6.opower+","
+
+		strFileData += UpsData.dcac.vol+",";
+		strFileData += UpsData.dcac.amp+",";
+		strFileData += UpsData.dcac.power+",";
+		strFileData += UpsData.dcac.ovol+",";
+		strFileData += UpsData.dcac.oamp+",";
+		strFileData += UpsData.dcac.opower+"\n\r"
+
+
+		fs.exists(filename,
+			function(exists){
+			if(!exists){
+				var strText='1_Ivol,1_Iamp,1_Ipow,1_Ovol,1_Oamp,1_Opow, 2_Ivol,2_Iamp,2_Ipow,2_Ovol,2_Oamp,2_Opow, 3_Ivol,3_Iamp,3_Ipow,3_Ovol,3_Oamp,3_Opow, 4_Ivol,4_Iamp,4_Ipow,4_Ovol,4_Oamp,4_Opow, 5_Ivol,5_Iamp,5_Ipow,5_Ovol,5_Oamp,5_Opow, 6_Ivol,6_Iamp,6_Ipow,6_Ovol,6_Oamp,6_Opow, Inv_Ivol,Inv_Iamp,_Ipow,Inv_Ovol,Inv_Oamp,Inv_Opow\n\r';
+				fs.appendFile(filename,strText,function(err){
+				});
+			}
+			else{
+				fs.appendFile(filename,strFileData,function(err){});
+			}
+			console.log(exists ? "it's here" : "no exists");
+		});
+}
+
 function read(){
 	//client.readInputRegisters(0,10).then(console.log);
-	client.readInputRegisters(0,10,function(err,data){
+	client.readInputRegisters(0,42,function(err,data){
 		if(err){
 			UpsData.module_1.vol=0;
 			UpsData.module_1.amp=0;
@@ -134,6 +212,8 @@ function read(){
 		console.log(UpsData.module_1.vol);
 		console.log(UpsData.module_1.amp);
 		console.log(UpsData.module_1.power);
+
+		fileWrite();
 	});
 };
 
