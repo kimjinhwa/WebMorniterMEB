@@ -77,14 +77,25 @@ div.divImage {
   float: left;
   font-size: 25px;
   line-height: 200%
-    ";
+}
+.contentDivChild{
+  margin-left: 40px;
+}
+.divSum{
+  margin-left: 25px;
+  line-height:150%;
+  padding: 16px 16px;
+}
+
+.sumTd {
+	align:center;
 }
 .menudiv {
   border: 0px outset red;
   background-color:white;
   height:650px;width:450px;
   float:left;font-size:25px;
-  line-height:200%";
+  line-height:200%;
 }
 .footer {
   margin-left: 5px;
@@ -131,29 +142,42 @@ div.divImage {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 td {
-  height: 60px;
-  padding: 2px 1px;
+  //height: 30px;
+  //padding: 2px 1px;
+  //margin-left:0;
 }
+
 #detailTd {
-  height: 60px;
-  padding: 6px 16px;
+  border: 0px outset red;
+  //align: "left";
+  //height: 30px;
+  //width=100px;
+  //margin-left:0;
+  background-color: #b4b9f3;
+  padding: 6px 50px;
 }
 #tdSum {
-  height: 100px;
-  width: 300px;
+  height: 20px;
+  //width: 300px;
+}
+#tdSumData {
+  //height: 20px;
+  //font-size: 40px;
+  //width: 300px;
 }
 .detailLabel {
-  font-size: 50px;
-  color: aliceblue;
+  //font-size: 40px;
+  //color: aliceblue;
   background-color: #b4b9f3;
-  padding: 6px 16px;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  //padding: 6px 16px;
+  //box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .detailSLabel {
-  padding: 16px 16px;
-  font-size: 60px;
+  //padding: 16px 16px;
+  //font-size: 30px;
   color: aliceblue;
   background-color: #b4b9f3;
-  padding: 26px 26px;
-  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  //padding: 26px 26px;
+  //box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+

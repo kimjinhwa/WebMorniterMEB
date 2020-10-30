@@ -1,3 +1,47 @@
+body{
+
+}
+.container{
+	display:flex;
+	flex-flow:row nowrap;
+	width:1450px;
+	height:700px;
+	border: 3px outset gray;
+	align-content:space-between;
+	padding: 20px 10px;
+}
+.menu {
+  display:flex;
+  flex-flow:row wrap;
+  //grid-template-columns:20% 80%;
+  flex-direction:row;
+  flex-wrap:wrap;
+  //margin-left: 5px;
+  border: 3px outset blue;
+  background-color: white;
+  height: 550px;
+  //width: 750px;
+  //float: left;
+  font-size: 25px;
+  //line-height: 200%
+  margin: 10px 10px;
+  padding: 30px 10px;
+}
+.menu_t1{
+	width:10%;
+  padding: 1px 20px;
+  margin: 5px 5px;
+}
+.vlabel {
+	width:75%;
+  //display: block;
+  //width: 350px;
+  //border: 1px outset gray;
+  background-color: #deeeff;
+  //margin-left: 10px ;
+  /padding: 2px 20px;
+  //box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 .divHead {
   width: 1450px;
   background: white;
@@ -51,33 +95,14 @@ div.divImage {
   vertical-align: baseline;
   height: 100px;
 }
-.vlabel {
-  display: block;
-  width: 350px;
-  border: 1px outset gray;
-  background-color: #deeeff;
-  margin: 2px 2px;
-  padding: 2px 20px;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
 .converterdiv {
+  //display:flex;
   border: 0px outset red;
   width: 500px;
   height: 650px;
   float: left;
   font-size: 25px;
   align: righ;
-}
-#menu {
-  margin-left: 5px;
-  border: 00px outset red;
-  background-color: white;
-  height: 650px;
-  width: 450px;
-  float: left;
-  font-size: 25px;
-  line-height: 200%
-    ";
 }
 .menudiv {
   border: 0px outset red;

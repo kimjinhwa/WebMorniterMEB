@@ -2,10 +2,23 @@
 var isConnectionButtonPressed;
 var Volpjs,Amppjs,Powpjs,AcDcVolpjs,AcDcAmppjs;
 var module_index=0;
+//const btnSave=document.querySelector('.button1');
 
 var requestURL="./jsonData";
 var request = new XMLHttpRequest();
 //var superHeroes ;
+//btnSave.addEventListener('click',()=>{
+//	console.log('btn click');
+//});
+function btnSave(){
+	console.log('btn click');
+	window.open("ftp://"+location.hostname,'file down load');
+}
+function showDetail(){
+	console.log('btn click');
+	//window.open("http://"+location.host+"/detail",'detail');
+	window.location.href="http://"+location.host+"/detail";
+}
 function requestJSONData(){
 	request.open('GET', requestURL);
 	request.responseType = 'json';
@@ -56,26 +69,52 @@ function randomFillSampleData(){
 function setDatatoIndex(){
 	(document.getElementById('lbl_Module1')).innerHTML=UpsData.module_1.vol.toFixed(1)+"[V] "+
 	  	UpsData.module_1.amp.toFixed(1)+"[A] " +
-	  	(UpsData.module_1.power/1000).toFixed(1)+"[KW]";
+	  	(UpsData.module_1.power/1000).toFixed(1)+"[KW]<BR>";
+	(document.getElementById('lbl_Module1')).innerHTML+=UpsData.module_1.ovol.toFixed(1)+"[V] "+
+	  	UpsData.module_1.oamp.toFixed(1)+"[A] " +
+	  	(UpsData.module_1.opower/1000).toFixed(1)+"[KW]";
+
 	(document.getElementById('lbl_Module2')).innerHTML=UpsData.module_2.vol.toFixed(1)+"[V] "+
 	  	UpsData.module_2.amp.toFixed(1)+"[A] " +
-	  	(UpsData.module_1.power/1000).toFixed(1)+"[KW]";
+	  	(UpsData.module_2.power/1000).toFixed(1)+"[KW]<BR>";
+	(document.getElementById('lbl_Module2')).innerHTML+=UpsData.module_2.ovol.toFixed(1)+"[V] "+
+	  	UpsData.module_2.oamp.toFixed(1)+"[A] " +
+	  	(UpsData.module_2.opower/1000).toFixed(1)+"[KW]";
+
 	(document.getElementById('lbl_Module3')).innerHTML=UpsData.module_3.vol.toFixed(1)+"[V] "+
 	  	UpsData.module_3.amp.toFixed(1)+"[A] " +
-	  	(UpsData.module_1.power/1000).toFixed(1)+"[KW]";
+	  	(UpsData.module_3.power/1000).toFixed(1)+"[KW]<BR>";
+	(document.getElementById('lbl_Module3')).innerHTML+=UpsData.module_3.ovol.toFixed(1)+"[V] "+
+	  	UpsData.module_3.oamp.toFixed(1)+"[A] " +
+	  	(UpsData.module_3.opower/1000).toFixed(1)+"[KW]";
+
 	(document.getElementById('lbl_Module4')).innerHTML=UpsData.module_4.vol.toFixed(1)+"[V] "+
 	  	UpsData.module_4.amp.toFixed(1)+"[A] " +
-	  	(UpsData.module_1.power/1000).toFixed(1)+"[KW]";
+	  	(UpsData.module_4.power/1000).toFixed(1)+"[KW]<BR>";
+	(document.getElementById('lbl_Module4')).innerHTML+=UpsData.module_4.ovol.toFixed(1)+"[V] "+
+	  	UpsData.module_4.oamp.toFixed(1)+"[A] " +
+	  	(UpsData.module_4.opower/1000).toFixed(1)+"[KW]";
+	
 	(document.getElementById('lbl_Module5')).innerHTML=UpsData.module_1.vol.toFixed(1)+"[V] "+
 	  	UpsData.module_5.amp.toFixed(1)+"[A] " +
-	  	(UpsData.module_1.power/1000).toFixed(1)+"[KW]";
+	  	(UpsData.module_5.power/1000).toFixed(1)+"[KW]<BR>";
+	(document.getElementById('lbl_Module5')).innerHTML+=UpsData.module_1.ovol.toFixed(1)+"[V] "+
+	  	UpsData.module_5.oamp.toFixed(1)+"[A] " +
+	  	(UpsData.module_5.opower/1000).toFixed(1)+"[KW]";
+
 	(document.getElementById('lbl_Module6')).innerHTML=UpsData.module_6.vol.toFixed(1)+"[V] "+
 	  	UpsData.module_6.amp.toFixed(1)+"[A] " +
-		  (UpsData.module_1.power/1000).toFixed(1)+"[KW]";
+		  (UpsData.module_6.power/1000).toFixed(1)+"[KW]<BR>";
+	(document.getElementById('lbl_Module6')).innerHTML+=UpsData.module_6.ovol.toFixed(1)+"[V] "+
+	  	UpsData.module_6.oamp.toFixed(1)+"[A] " +
+		  (UpsData.module_6.opower/1000).toFixed(1)+"[KW]";
 
 	(document.getElementById('lbl_acdc')).innerHTML=UpsData.dcac.vol.toFixed(1)+"[V] "+
 	  	UpsData.dcac.amp.toFixed(1)+"[A] " +
-		  (UpsData.module_1.power/1000).toFixed(1)+"[KW]";
+		  (UpsData.dcac.power/1000).toFixed(1)+"[KW]<BR>";
+	(document.getElementById('lbl_acdc')).innerHTML+=UpsData.dcac.ovol.toFixed(1)+"[V] "+
+	  	UpsData.dcac.oamp.toFixed(1)+"[A] " +
+		  (UpsData.dcac.opower/1000).toFixed(1)+"[KW]";
 }
 
 function onBodyLoadIndexEvent(){

@@ -6,9 +6,9 @@
 </style>
 <head>
 	<link rel="stylesheet" href="public/css/index.css" >
-	<script src="public/js/grobalVar.js"></script>
-	<script src="public/js/index.js"></script>
-	<script type="text/javascript" src="public/js/processing.js"></script>
+	<script src="public/js/grobalVar.js" defer></script>
+	<script type="text/javascript" defer src="public/js/processing.js"></script>
+	<script src="public/js/index.js" defer></script>
 </head>
 <body  onLoad='onBodyLoadIndexEvent()'>
 
@@ -20,19 +20,15 @@
 <hr style="position:absolute;boder:outset 5px black; background-color:black;color:orange;height:3px;width:1400px">
 <br>
 <p></p>
-
-<div id="menu" >
-	<table>
-	<tr> <td ></td> <td align="center">DC/DC Converter</td> </tr>
-	<tr> <td>RED1 </td> <td><label class="vlabel" id=lbl_Module1 onclick="changeModule(0)">V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
-	<tr> <td>RED2 </td> <td><label class="vlabel" id=lbl_Module2 onclick="changeModule(1)">V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
-	<tr> <td>RED3 </td> <td><label class="vlabel" id=lbl_Module3 onclick="changeModule(2)" >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
-	<tr> <td>RED4 </td> <td><label class="vlabel" id=lbl_Module4 onclick="changeModule(3)" >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
-	<tr> <td>RED5 </td> <td><label class="vlabel" id=lbl_Module5 onclick="changeModule(4)" >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
-	<tr> <td>RED6 </td> <td><label class="vlabel" id=lbl_Module6 onclick="changeModule(5)" >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
-	</table>
-	
-</div>
+<div class=container>
+	<div class="menu" >
+		<div class=menu_t1 >RED1</div><div class='vlabel' id='lbl_Module1' onclick='changeModule(0)'>330[V] 30.3[A] 3.3[KW] </div>
+		<div class=menu_t1 >RED2</div><div class='vlabel' id='lbl_Module2' onclick='changeModule(0)'>330[V] 30.3[A] 3.3[KW] </div>
+		<div class=menu_t1 >RED3</div><div class='vlabel' id='lbl_Module3' onclick='changeModule(0)'>330[V] 30.3[A] 3.3[KW] </div>
+		<div class=menu_t1 >RED4</div><div class='vlabel' id='lbl_Module4' onclick='changeModule(0)'>330[V] 30.3[A] 3.3[KW] </div>
+		<div class=menu_t1 >RED5</div><div class='vlabel' id='lbl_Module5' onclick='changeModule(0)'>330[V] 30.3[A] 3.3[KW] </div>
+		<div class=menu_t1 >RED6</div><div class='vlabel' id='lbl_Module6' onclick='changeModule(0)'>330[V] 30.3[A] 3.3[KW] </div>
+	</div>
 
 <div class=converterdiv >
 	<div>
@@ -55,16 +51,15 @@
 	<div class="divButtonContainer" >
 		<div class="Divbutton1">
 			<button class="button1" style="width:150px;">전 체</button> 
-			<button  class="button1" style="width:150px;">개 별</button> <br>
+			<button  class="button1" onClick='showDetail()' style="width:150px;">개 별</button> <br>
 			<button  class="button1" id=refreshTime style="width:311px;" onclick="changeReflashTime()">Div : 1 sec</button> 
 		</div>
 	</div>
 </div>
-
 <div class=converterdiv >
 	<table style="margin-left: 50px;" >
 	<tr> <td align="center">DC/AC Inverter</td> </tr>
-	<tr height=60px> <td align="center"><label class="vlabel" id=lbl_acdc >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
+	<tr height=60px> <td ><label class="vlabel" id=lbl_acdc >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
 	</table>
 
 	<div>
@@ -89,10 +84,25 @@
 	<div class="divButtonContainer" >
 		<div class="Divbutton1" style="width:340px;">
 			<button class="button1" id="btnConnection" style="margin-left: 15px;width:150px;" onclick="onClickConnection()">Connection</button> 
-			<button  class="button1" style="width:150px;">Data Save</button> <br>
+			<button  class="button1" onclick='btnSave()' style="width:150px;">Data Save</button> <br>
 		</div>
 	</div>
 </div>
+</div><!--end container -->
+	<!-- 
+	<table>
+	<tr> <td ></td> <td align="center">DC/DC Converter</td> </tr>
+	<tr> <td>RED1 </td> <td><label class="vlabel" id=lbl_Module1 onclick="changeModule(0)">330[V] 30.3[A] 3.3[KW] </label>
+			                <label class="vlabel" id=lbl_Module1 onclick="changeModule(0)">330[V] 30.3[A] 3.3[KW] </label></td> </tr>
+	<tr> <td>RED2 </td> <td><label class="vlabel" id=lbl_Module2 onclick="changeModule(1)">330[V] 30.3[A] 3.3[KW] </label></td> </tr>
+	<tr> <td>RED3 </td> <td><label class="vlabel" id=lbl_Module3 onclick="changeModule(2)" >330[V] 30.3[A] 0.3[KW] </label></td> </tr>
+	<tr> <td>RED4 </td> <td><label class="vlabel" id=lbl_Module4 onclick="changeModule(3)" >330[V] 30.3[A] 0.3[KW] </label></td> </tr>
+	<tr> <td>RED5 </td> <td><label class="vlabel" id=lbl_Module5 onclick="changeModule(4)" >330[V] 30.3[A] 0.3[KW] </label></td> </tr>
+	<tr> <td>RED6 </td> <td><label class="vlabel" id=lbl_Module6 onclick="changeModule(5)" >330[V] 30.3[A] 0.3[KW] </label></td> </tr>
+	</table>
+	-->	
+
+
 <div class=footer>
 <p>
 <hr style="position:absolute;boder:outset 5px black; background-color:black;color:orange;height:3px;width:1400px">

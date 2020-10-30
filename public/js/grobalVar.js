@@ -5,5 +5,5 @@
 		"module_4" : 	{"vol":330.4,"amp":10.4,"power":0,"ovol":330.1,"oamp":10.1,"opower":0},
 		"module_5" : 	{"vol":330.5,"amp":10.5,"power":0,"ovol":330.1,"oamp":10.1,"opower":0},
 		"module_6" : 	{"vol":330.6,"amp":10.6,"power":0,"ovol":330.1,"oamp":10.1,"opower":0},
-		"dcac" : 	{"vol":330.6,"amp":10.6,"power":0},
+		"dcac" :		{"vol":330.6,"amp":10.6,"power":0,"ovol":330.6,"oamp":10.6,"opower":2.0},
 };

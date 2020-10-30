@@ -8,11 +8,20 @@ var fs= require('fs');
 // for serial modbus
 var ModbusRTU = require('modbus-serial');
 var client = new ModbusRTU();
-	client.connectRTUBuffered("/dev/ttyUSB0",{baudRate:9600},read);
 	client.setID(1);
 	client.setTimeout(500);
+	client.connectRTUBuffered("/dev/ttyUSB0",{baudRate:9600},read);
 
-
+var tout=setTimeout(timeFunction,1000);
+var isModbusReadOK=false;
+function timeFunction(){
+	setTimeout(timeFunction,1000);
+	console.log(client.isOpen);
+	if(client.isOpen)
+		randomFillSampleData();
+	else
+		client.connectRTUBuffered("/dev/ttyUSB0",{baudRate:9600},read);
+}
 var UpsData = {
 		"module_1" : 	{"vol":330.1,"amp":10.1,"power":0,"ovol":330.1,"oamp":10.1,"opower":0},
 		"module_2" : 	{"vol":330.2,"amp":10.2,"power":0,"ovol":330.1,"oamp":10.1,"opower":0},
@@ -20,7 +29,7 @@ var UpsData = {
 		"module_4" : 	{"vol":330.4,"amp":10.4,"power":0,"ovol":330.1,"oamp":10.1,"opower":0},
 		"module_5" : 	{"vol":330.5,"amp":10.5,"power":0,"ovol":330.1,"oamp":10.1,"opower":0},
 		"module_6" : 	{"vol":330.6,"amp":10.6,"power":0,"ovol":330.1,"oamp":10.1,"opower":0},
-		"dcac" : 	{"vol":330.6,"amp":10.6,"power":0},
+		"dcac" : 	{"vol":330.6,"amp":10.6,"power":0,"ovol":330.6,"oamp":10.6,"opower":0},
 };
 function write(){
 	client.writeRegisters(5,[0,0xffff])
@@ -35,11 +44,18 @@ function fileWrite(){
 	var nowDate = new Date(Date.now());
 		filename += nowDate.getFullYear();
 		filename += fillZero(2,(nowDate.getMonth()+1).toString());
-		filename += fillZero(2,(nowDate.getDate().toString()));
+		filename += fillZero(2,(nowDate.getDate()).toString());
 		filename += '.csv';
 
 	var strFileData ;
-		strFileData  = UpsData.module_1.vol+",";
+		strFileData  = nowDate.getFullYear()+ '-';
+		strFileData += fillZero(2,(nowDate.getMonth()+1).toString())+'-';
+		strFileData += fillZero(2,(nowDate.getDate()).toString())+' ';
+		strFileData += fillZero(2,(nowDate.getHours().toString()))+':';
+		strFileData += fillZero(2,(nowDate.getMinutes().toString()))+':';
+		strFileData += fillZero(2,(nowDate.getSeconds().toString()))+',';
+
+		strFileData += UpsData.module_1.vol+",";
 		strFileData += UpsData.module_1.amp+",";
 		strFileData += UpsData.module_1.power+",";
 		strFileData += UpsData.module_1.ovol+",";
@@ -92,21 +108,20 @@ function fileWrite(){
 		fs.exists(filename,
 			function(exists){
 			if(!exists){
-				var strText='1_Ivol,1_Iamp,1_Ipow,1_Ovol,1_Oamp,1_Opow, 2_Ivol,2_Iamp,2_Ipow,2_Ovol,2_Oamp,2_Opow, 3_Ivol,3_Iamp,3_Ipow,3_Ovol,3_Oamp,3_Opow, 4_Ivol,4_Iamp,4_Ipow,4_Ovol,4_Oamp,4_Opow, 5_Ivol,5_Iamp,5_Ipow,5_Ovol,5_Oamp,5_Opow, 6_Ivol,6_Iamp,6_Ipow,6_Ovol,6_Oamp,6_Opow, Inv_Ivol,Inv_Iamp,_Ipow,Inv_Ovol,Inv_Oamp,Inv_Opow\n\r';
+				var strText='datetime,1_Ivol,1_Iamp,1_Ipow,1_Ovol,1_Oamp,1_Opow, 2_Ivol,2_Iamp,2_Ipow,2_Ovol,2_Oamp,2_Opow, 3_Ivol,3_Iamp,3_Ipow,3_Ovol,3_Oamp,3_Opow, 4_Ivol,4_Iamp,4_Ipow,4_Ovol,4_Oamp,4_Opow, 5_Ivol,5_Iamp,5_Ipow,5_Ovol,5_Oamp,5_Opow, 6_Ivol,6_Iamp,6_Ipow,6_Ovol,6_Oamp,6_Opow, Inv_Ivol,Inv_Iamp,_Ipow,Inv_Ovol,Inv_Oamp,Inv_Opow\n\r';
 				fs.appendFile(filename,strText,function(err){
 				});
 			}
 			else{
 				fs.appendFile(filename,strFileData,function(err){});
 			}
-			console.log(exists ? "it's here" : "no exists");
 		});
 }
 
 function read(){
-	//client.readInputRegisters(0,10).then(console.log);
 	client.readInputRegisters(0,42,function(err,data){
 		if(err){
+			isModbusReadOK=false;
 			UpsData.module_1.vol=0;
 			UpsData.module_1.amp=0;
 			UpsData.module_1.power=0;
@@ -155,64 +170,61 @@ function read(){
 			UpsData.dcac.ovol=0;
 			UpsData.dcac.oamp=0;
 			UpsData.dcac.opower=0;
-			console.log("Modbus Receive Data Error.");
+			console.log("Modbus Receive Data Error. Retry connect");
 			return;
-		}
+		};
 		var idx=0;
-		UpsData.module_1.vol=data.data[idx++];
-		UpsData.module_1.amp=data.data[idx++];
-		UpsData.module_1.power=data.data[idx++];
-		UpsData.module_1.ovol=data.data[idx++];
-		UpsData.module_1.oamp=data.data[idx++];
-		UpsData.module_1.opower=data.data[idx++];
+		UpsData.module_1.vol=data.data[idx++]/10.0;
+		UpsData.module_1.amp=data.data[idx++]/10.0;
+		UpsData.module_1.power=data.data[idx++]/10.0;
+		UpsData.module_1.ovol=data.data[idx++]/10.0;
+		UpsData.module_1.oamp=data.data[idx++]/10.0;
+		UpsData.module_1.opower=data.data[idx++]/10.0;
 
-		UpsData.module_2.vol=data.data[idx++];
-		UpsData.module_2.amp=data.data[idx++];
-		UpsData.module_2.power=data.data[idx++];
-		UpsData.module_2.ovol=data.data[idx++];
-		UpsData.module_2.oamp=data.data[idx++];
-		UpsData.module_2.opower=data.data[idx++];
+		UpsData.module_2.vol=data.data[idx++]/10.0;
+		UpsData.module_2.amp=data.data[idx++]/10.0;
+		UpsData.module_2.power=data.data[idx++]/10.0;
+		UpsData.module_2.ovol=data.data[idx++]/10.0;
+		UpsData.module_2.oamp=data.data[idx++]/10.0;
+		UpsData.module_2.opower=data.data[idx++]/10.0;
 
-		UpsData.module_3.vol=data.data[idx++];
-		UpsData.module_3.amp=data.data[idx++];
-		UpsData.module_3.power=data.data[idx++];
-		UpsData.module_3.ovol=data.data[idx++];
-		UpsData.module_3.oamp=data.data[idx++];
-		UpsData.module_3.opower=data.data[idx++];
+		UpsData.module_3.vol=data.data[idx++]/10.0;
+		UpsData.module_3.amp=data.data[idx++]/10.0;
+		UpsData.module_3.power=data.data[idx++]/10.0;
+		UpsData.module_3.ovol=data.data[idx++]/10.0;
+		UpsData.module_3.oamp=data.data[idx++]/10.0;
+		UpsData.module_3.opower=data.data[idx++]/10.0;
 
-		UpsData.module_4.vol=data.data[idx++];
-		UpsData.module_4.amp=data.data[idx++];
-		UpsData.module_4.power=data.data[idx++];
-		UpsData.module_4.ovol=data.data[idx++];
-		UpsData.module_4.oamp=data.data[idx++];
-		UpsData.module_4.opower=data.data[idx++];
+		UpsData.module_4.vol=data.data[idx++]/10.0;
+		UpsData.module_4.amp=data.data[idx++]/10.0;
+		UpsData.module_4.power=data.data[idx++]/10.0;
+		UpsData.module_4.ovol=data.data[idx++]/10.0;
+		UpsData.module_4.oamp=data.data[idx++]/10.0;
+		UpsData.module_4.opower=data.data[idx++]/10.0;
 
-		UpsData.module_5.vol=data.data[idx++];
-		UpsData.module_5.amp=data.data[idx++];
-		UpsData.module_5.power=data.data[idx++];
-		UpsData.module_5.ovol=data.data[idx++];
-		UpsData.module_5.oamp=data.data[idx++];
-		UpsData.module_5.opower=data.data[idx++];
+		UpsData.module_5.vol=data.data[idx++]/10.0;
+		UpsData.module_5.amp=data.data[idx++]/10.0;
+		UpsData.module_5.power=data.data[idx++]/10.0;
+		UpsData.module_5.ovol=data.data[idx++]/10.0;
+		UpsData.module_5.oamp=data.data[idx++]/10.0;
+		UpsData.module_5.opower=data.data[idx++]/10.0;
 
-		UpsData.module_6.vol=data.data[idx++];
-		UpsData.module_6.amp=data.data[idx++];
-		UpsData.module_6.power=data.data[idx++];
-		UpsData.module_6.ovol=data.data[idx++];
-		UpsData.module_6.oamp=data.data[idx++];
-		UpsData.module_6.opower=data.data[idx++];
+		UpsData.module_6.vol=data.data[idx++]/10.0;
+		UpsData.module_6.amp=data.data[idx++]/10.0;
+		UpsData.module_6.power=data.data[idx++]/10.0;
+		UpsData.module_6.ovol=data.data[idx++]/10.0;
+		UpsData.module_6.oamp=data.data[idx++]/10.0;
+		UpsData.module_6.opower=data.data[idx++]/10.0;
 
-		UpsData.dcac.vol=data.data[idx++];
-		UpsData.dcac.amp=data.data[idx++];
-		UpsData.dcac.power=data.data[idx++];
-		UpsData.dcac.ovol=data.data[idx++];
-		UpsData.dcac.oamp=data.data[idx++];
-		UpsData.dcac.opower=data.data[idx];
+		UpsData.dcac.vol=data.data[idx++]/10.0;
+		UpsData.dcac.amp=data.data[idx++]/10.0;
+		UpsData.dcac.power=data.data[idx++]/10.0;
+		UpsData.dcac.ovol=data.data[idx++]/10.0;
+		UpsData.dcac.oamp=data.data[idx++]/10.0;
+		UpsData.dcac.opower=data.data[idx]/10.0;
 
 
-		console.log(UpsData.module_1.vol);
-		console.log(UpsData.module_1.amp);
-		console.log(UpsData.module_1.power);
-
+		isModbusReadOK=true;
 		fileWrite();
 	});
 };
@@ -264,7 +276,8 @@ router.get('/detail', function(req, res, next) {
 router.get('/jsonData', function(req, res, next) {
     //res.type("application/json");
     //res.send(JSON.stringify(items));
-    randomFillSampleData();
+	if(isModbusReadOK==false)
+		randomFillSampleData();
     res.type("text/json");
     res.send(UpsData);
    // res.render('jsonData', {data : 'index testData list ejsk'});

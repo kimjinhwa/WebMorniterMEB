@@ -1,13 +1,50 @@
 #!/bin/sh
+###BEGIN INIT INFO	
+#Provides:	mebStartup
+#Required-Start:	$remote_fs	$syslog
+#Required-Stop:		$remote_fs	$syslog
+#Default-Start:	2 3 4 5 
+#Default-Stop:	0 1 6
+#Short-Description: node Service init.d script
+#Description: Node js Server Program.
+### END INIT INFO
 
-PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bon
+PATH=/sbin:/usr/bin/node:/usr/sbin:/bin:/usr/bin:/usr/local/bin
 
+WORK_DIR="/home/pi/WebMorniterMEB"
+FILE_NAME="index.js"
 start(){
-	echo "Test Prog Started"
+	cd $WORK_DIR;
+    node $FILE_NAME &
+	echo "node Prog Started"
 }
 
 stop(){
 	pid=$(ps aux | grep $FILE_NAME | awk '{print $2}')
-
+	if [ -n "$pid"  ]
+	then 
+		kill -9 $pid
+	fi
+	sleep 1
+	echo "Program is terminated"
 }
+
+case "$1" in
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		stop
+		start
+		;;
+	*)
+		echo "Usage: /etc/init.d/mebStartup{start|stop|restart}"
+		exit 1
+		;;
+
+esac
+exit 0
 

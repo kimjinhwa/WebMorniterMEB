@@ -1,5 +1,6 @@
 ArrayList array_upsData;
 var VUpsData ;
+var drawMode=0; //0: vol 1: amp 2: power
 float scale_x,scale_y;
 int selectedModule;
 String displayKind;
@@ -42,11 +43,16 @@ void draw() {
 	stroke (255);
 	//line (width/2, 0, width/2, height);
 	line (0, height/2, width, height/2);
-
 	stroke (0, 255, 0);
 	//line (width/2, 0, width/2, height);
 	text(strModule[selectedModule],width/2-textWidth("Module 1")/2,20);
   	text(displayKind, width-textWidth(displayKind)-10, 20);	// place the text centered on the drawing area
+	if(drawMode==0)
+		text("250", width-textWidth("250")-10, height/2+10);	// place the text centered on the drawing area
+	if(drawMode==1)
+		text("0", width-textWidth("0")-10, height/2+10);	// place the text centered on the drawing area
+	if(drawMode==2)
+		text("0", width-textWidth("0")-10, height/2+10);	// place the text centered on the drawing area
 	for(int i = 0; i< width ; i++){
 		//point(width/8 + radius+i,py2);
     	ellipse(i,py2Array[i],1,1);
@@ -61,6 +67,7 @@ void drawText(int module,int kind,String strText)
   //float twidth = textWidth(UpsData.module_2.vol);			// get the width for the text
   //text(t, (width-twidth)/2, height/2);	// place the text centered on the drawing area
 	//strModule
+	drawMode=kind;
 	selectedModule=module;
 	displayKind=strText;
   if(kind==0){ // voltage display 
@@ -70,23 +77,23 @@ void drawText(int module,int kind,String strText)
   }
   else if(kind==1){ // ampere display 
 	scale_x=1/width;
-	scale_y=height/100;// 100A ;
-	py2Array[0] = height - scale_y*VUpsData.module_1.amp;
+	scale_y=height/10;// 100A ;
+	py2Array[0] = height/2 - scale_y*VUpsData[strModule[module]].amp;
   }
-  else if(kind==2){ // ampere display 
+  else if(kind==2){ // KW display 
 	scale_x=1/width;
 	scale_y=height/10;// 100A ;
-	py2Array[0] = height - scale_y*VUpsData.module_1.power;
+	py2Array[0] = height/2 - scale_y*VUpsData[strModule[module]].power;
   }
   else if(kind==3){ // AcDc
 	scale_x=1/width;
 	scale_y=height/10;// 100A ;
-	py2Array[0] = height - scale_y*VUpsData.dcac.vol;
+	py2Array[0] = height - scale_y*VUpsData.dcac.ovol;
   }
   else if(kind==4){ // AcDc
 	scale_x=1/width;
 	scale_y=height/10;// 100A ;
-	py2Array[0] = height - scale_y*VUpsData.dcac.amp;
+	py2Array[0] = height/2 - scale_y*VUpsData.dcac.oamp;
   }
 	dataShift();
  	//text(VUpsData.module_2.vol, (width-twidth)/2, height/2);	// place the text centered on the drawing area
