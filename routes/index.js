@@ -16,7 +16,7 @@ var tout=setTimeout(timeFunction,1000);
 var isModbusReadOK=false;
 function timeFunction(){
 	setTimeout(timeFunction,1000);
-	console.log(client.isOpen);
+	//console.log(client.isOpen);
 	if(client.isOpen)
 		randomFillSampleData();
 	else
@@ -102,7 +102,8 @@ function fileWrite(){
 		strFileData += UpsData.dcac.power+",";
 		strFileData += UpsData.dcac.ovol+",";
 		strFileData += UpsData.dcac.oamp+",";
-		strFileData += UpsData.dcac.opower+"\n\r"
+		//strFileData += UpsData.dcac.opower;
+		strFileData += UpsData.dcac.opower+"\r";
 
 
 		fs.exists(filename,
