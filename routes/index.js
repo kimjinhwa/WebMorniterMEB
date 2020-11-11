@@ -7,6 +7,10 @@ var router = express.Router();
 var fs= require('fs');
 // for serial modbus
 var ModbusRTU = require('modbus-serial');
+var DateTimeControl = require('set-system-clock');
+
+const {exec} = require('child_process');
+
 var client = new ModbusRTU();
 	client.setID(1);
 	client.setTimeout(500);
@@ -122,6 +126,7 @@ function fileWrite(){
 function read(){
 	client.readInputRegisters(0,42,function(err,data){
 		if(err){
+			console.log(err);
 			isModbusReadOK=false;
 			UpsData.module_1.vol=0;
 			UpsData.module_1.amp=0;
@@ -273,6 +278,45 @@ router.get('/', function(req, res, next) {
 }) ;
 router.get('/detail', function(req, res, next) {
     res.render('detail', {data : 'index testData list ejsk'});
+});
+router.get('/setTime', function(req, res, next) {
+    //res.render('detail', {data : 'index testData list ejsk'});
+	var rTime = req.param("time");
+	var today = new Date(rTime);
+	//exec(`date -s "${dateFormat(dateTime, 'mm/dd/yyyy HH:MM:ss')}" --utc`);
+	var command = "sudo date -s '";
+	command += today.getDate();
+	command +='/'; 
+	command += today.getMonth();
+	command +='/'; 
+	command += today.getFullYear();
+	command +=' '; 
+	command += today.getHours();
+	command +=':'; 
+	command += today.getMinutes();
+	command +=':'; 
+	command += today.getSeconds();
+	command +=" utc'"; 
+	console.log(rTime);
+	console.log(today);
+	console.log(command);
+	exec(command,(error,stdout,stderr) => {
+		if(error){
+			console.log('stdout: ${error}');
+			return;
+		}
+		if(stderr){
+			console.log('stdout: ${stderr}');
+			return;
+		}
+		console.log('stdout: ${stdout}'+stdout);
+	});
+	//DateTimeControl.setDateTime(new Date(rTime));
+	//DateTimeControl.setDateTime(new Date('1/1/2020 10:30:30'));
+					
+    res.type("text/json");
+    res.send(UpsData);
+
 });
 router.get('/jsonData', function(req, res, next) {
     //res.type("application/json");

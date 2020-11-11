@@ -14,11 +14,24 @@ function btnSave(){
 	console.log('btn click');
 	window.open("ftp://"+location.hostname,'file down load');
 }
+function btnSetTime(){
+	console.log('btn click');
+	let nowTime = new Date();
+	alert("Set Time"+ nowTime);
+
+	request.open('GET', "./setTime?time="+nowTime);
+
+	request.responseType = 'json';
+	request.send();
+	//window.open("ftp://"+location.hostname,'file down load');
+}
+/*
 function showDetail(){
 	console.log('btn click');
 	//window.open("http://"+location.host+"/detail",'detail');
 	window.location.href="http://"+location.host+"/detail";
 }
+*/
 function requestJSONData(){
 	request.open('GET', requestURL);
 	request.responseType = 'json';
@@ -27,7 +40,7 @@ function requestJSONData(){
 request.onload = function(){
 	UpsData= request.response;
 	setDatatoIndex();
-	setProcessingInstance();
+	//setProcessingInstance();
 	if(isConnectionButtonPressed)
 		setTimeout(randomFillSampleData,reflashTime);
 };
@@ -67,69 +80,48 @@ function randomFillSampleData(){
 }
 
 function setDatatoIndex(){
-	(document.getElementById('lbl_Module1')).innerHTML=UpsData.module_1.vol.toFixed(1)+"[V] "+
-	  	UpsData.module_1.amp.toFixed(1)+"[A] " +
-	  	(UpsData.module_1.power/1000).toFixed(1)+"[KW]<BR>";
-	(document.getElementById('lbl_Module1')).innerHTML+=UpsData.module_1.ovol.toFixed(1)+"[V] "+
-	  	UpsData.module_1.oamp.toFixed(1)+"[A] " +
-	  	(UpsData.module_1.opower/1000).toFixed(1)+"[KW]";
+	var array=['module_1','module_2','module_3','module_4','module_5','module_6','dcac'];
+	var array1=['module_11','module_22','module_33','module_44','module_55','module_66','dcac_1'];
+	var array_lbl=['Module1','Module2','Module3','Module4','Module5','Module6','lbl_dcac'];
+	var arrayIndex=0;
+	var ctl_lbl;
+	var ctl_ups;
+	array.forEach(element=>{
+		ctl_ups=UpsData[element];
+		
+		ctl_lbl_vol=document.getElementById(array[arrayIndex]+"_Vol");
+		ctl_lbl_amp=document.getElementById(array[arrayIndex]+"_amp");
+		ctl_lbl_pow=document.getElementById(array[arrayIndex]+"_pow");
 
-	(document.getElementById('lbl_Module2')).innerHTML=UpsData.module_2.vol.toFixed(1)+"[V] "+
-	  	UpsData.module_2.amp.toFixed(1)+"[A] " +
-	  	(UpsData.module_2.power/1000).toFixed(1)+"[KW]<BR>";
-	(document.getElementById('lbl_Module2')).innerHTML+=UpsData.module_2.ovol.toFixed(1)+"[V] "+
-	  	UpsData.module_2.oamp.toFixed(1)+"[A] " +
-	  	(UpsData.module_2.opower/1000).toFixed(1)+"[KW]";
+		ctl_lbl_vol_1=document.getElementById(array1[arrayIndex]+"_Vol");
+		ctl_lbl_amp_1=document.getElementById(array1[arrayIndex]+"_amp");
+		ctl_lbl_pow_1=document.getElementById(array1[arrayIndex]+"_pow");
 
-	(document.getElementById('lbl_Module3')).innerHTML=UpsData.module_3.vol.toFixed(1)+"[V] "+
-	  	UpsData.module_3.amp.toFixed(1)+"[A] " +
-	  	(UpsData.module_3.power/1000).toFixed(1)+"[KW]<BR>";
-	(document.getElementById('lbl_Module3')).innerHTML+=UpsData.module_3.ovol.toFixed(1)+"[V] "+
-	  	UpsData.module_3.oamp.toFixed(1)+"[A] " +
-	  	(UpsData.module_3.opower/1000).toFixed(1)+"[KW]";
 
-	(document.getElementById('lbl_Module4')).innerHTML=UpsData.module_4.vol.toFixed(1)+"[V] "+
-	  	UpsData.module_4.amp.toFixed(1)+"[A] " +
-	  	(UpsData.module_4.power/1000).toFixed(1)+"[KW]<BR>";
-	(document.getElementById('lbl_Module4')).innerHTML+=UpsData.module_4.ovol.toFixed(1)+"[V] "+
-	  	UpsData.module_4.oamp.toFixed(1)+"[A] " +
-	  	(UpsData.module_4.opower/1000).toFixed(1)+"[KW]";
-	
-	(document.getElementById('lbl_Module5')).innerHTML=UpsData.module_1.vol.toFixed(1)+"[V] "+
-	  	UpsData.module_5.amp.toFixed(1)+"[A] " +
-	  	(UpsData.module_5.power/1000).toFixed(1)+"[KW]<BR>";
-	(document.getElementById('lbl_Module5')).innerHTML+=UpsData.module_1.ovol.toFixed(1)+"[V] "+
-	  	UpsData.module_5.oamp.toFixed(1)+"[A] " +
-	  	(UpsData.module_5.opower/1000).toFixed(1)+"[KW]";
-
-	(document.getElementById('lbl_Module6')).innerHTML=UpsData.module_6.vol.toFixed(1)+"[V] "+
-	  	UpsData.module_6.amp.toFixed(1)+"[A] " +
-		  (UpsData.module_6.power/1000).toFixed(1)+"[KW]<BR>";
-	(document.getElementById('lbl_Module6')).innerHTML+=UpsData.module_6.ovol.toFixed(1)+"[V] "+
-	  	UpsData.module_6.oamp.toFixed(1)+"[A] " +
-		  (UpsData.module_6.opower/1000).toFixed(1)+"[KW]";
-
-	(document.getElementById('lbl_acdc')).innerHTML=UpsData.dcac.vol.toFixed(1)+"[V] "+
-	  	UpsData.dcac.amp.toFixed(1)+"[A] " +
-		  (UpsData.dcac.power/1000).toFixed(1)+"[KW]<BR>";
-	(document.getElementById('lbl_acdc')).innerHTML+=UpsData.dcac.ovol.toFixed(1)+"[V] "+
-	  	UpsData.dcac.oamp.toFixed(1)+"[A] " +
-		  (UpsData.dcac.opower/1000).toFixed(1)+"[KW]";
+		ctl_lbl_vol.innerHTML= ctl_ups.vol.toFixed(1)+"[V]";
+		ctl_lbl_amp.innerHTML= ctl_ups.amp.toFixed(1)+"[A]";
+		ctl_lbl_pow.innerHTML= ctl_ups.power.toFixed(1)+"[W]";
+		ctl_lbl_vol_1.innerHTML= ctl_ups.ovol.toFixed(1)+"[V]";
+		ctl_lbl_amp_1.innerHTML= ctl_ups.oamp.toFixed(1)+"[A]";
+		ctl_lbl_pow_1.innerHTML= ctl_ups.opower.toFixed(1)+"[W]";
+		arrayIndex++;
+	});
 }
-
 function onBodyLoadIndexEvent(){
 	
 	randomFillSampleData();
-	document.getElementById('refreshTime').innerHTML="Div : "+reflashTime/1000+ " sec";
+	//document.getElementById('refreshTime').innerHTML="Div : "+reflashTime/1000+ " sec";
 	isConnectionButtonPressed=false;
 	module_index=0;
 	requestJSONData();
 }
+/*
 function SelectChange()
 {
 	var sel = (document.getElementById('option'));
 	document.getElementById('sellblId').innerHTML=sel.options[sel.selectedIndex].text;
 }
+*/
 function changeReflashTime(){
 	if(reflashTime==500) reflashTime = 1000;
 	else if(reflashTime==1000) reflashTime = 2000;
@@ -178,7 +170,7 @@ function setProcessingInstance() {
 
 function changeModule(index){
 	module_index=index;
-	Volpjs.drawText(module_index,0,"Vol");//module 1~6, kind 0:vol, 1:amp 2: power
-	Amppjs.drawText(module_index,0,"Amp");//module 1~6, kind 0:vol, 1:amp 2: power
-	Powpjs.drawText(module_index,0,"Pow");//module 1~6, kind 0:vol, 1:amp 2: power
+	//Volpjs.drawText(module_index,0,"Vol");//module 1~6, kind 0:vol, 1:amp 2: power
+	//Amppjs.drawText(module_index,0,"Amp");//module 1~6, kind 0:vol, 1:amp 2: power
+	//Powpjs.drawText(module_index,0,"Pow");//module 1~6, kind 0:vol, 1:amp 2: power
 }

@@ -3,8 +3,7 @@
 var express = require('express');
 var http = require('http');
 var app = express();
-
-//express 서버 포트 설정(cafe24 호스팅 서버는 8001 포트 사용)
+// express 서버 포트 설정(cafe24 호스팅 서버는 8001 포트 사용)
 app.set('port', process.env.PORT || 8001)
 
 //html 템플릿 엔진 ejs 설정

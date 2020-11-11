@@ -2,8 +2,6 @@
 
 <html >
 <meta charset="utf-8">
-<style>
-</style>
 <head>
 	<link rel="stylesheet" href="public/css/index.css" >
 	<script src="public/js/grobalVar.js" defer></script>
@@ -13,96 +11,72 @@
 <body  onLoad='onBodyLoadIndexEvent()'>
 
 <div class="divHead">
-	<div class="left"><H1 align="center">염분차발전 전기충전 인프라 전력 모니터링 시스템</H1></div>
-	<div class="right" > <img class="imglogo" src="public/images/CompanyLogo.png" >
-	</div>
+
+	<div class="left"><img class="imglogo" src="public/images/logo.png" ></div>
+	<div class="middle">염분차발전 전력 모니터링 시스템</div>
+	<div class="right" > <img class="imglogo" src="public/images/kier.png" > </div>
 </div>
+		<!-- 
 <hr style="position:absolute;boder:outset 5px black; background-color:black;color:orange;height:3px;width:1400px">
-<br>
-<p></p>
+ Content div start-->
 <div class=container>
 	<div class="menu" >
-		<div class=menu_t1 >RED1</div><div class='vlabel' id='lbl_Module1' onclick='changeModule(0)'>330[V] 30.3[A] 3.3[KW] </div>
-		<div class=menu_t1 >RED2</div><div class='vlabel' id='lbl_Module2' onclick='changeModule(0)'>330[V] 30.3[A] 3.3[KW] </div>
-		<div class=menu_t1 >RED3</div><div class='vlabel' id='lbl_Module3' onclick='changeModule(0)'>330[V] 30.3[A] 3.3[KW] </div>
-		<div class=menu_t1 >RED4</div><div class='vlabel' id='lbl_Module4' onclick='changeModule(0)'>330[V] 30.3[A] 3.3[KW] </div>
-		<div class=menu_t1 >RED5</div><div class='vlabel' id='lbl_Module5' onclick='changeModule(0)'>330[V] 30.3[A] 3.3[KW] </div>
-		<div class=menu_t1 >RED6</div><div class='vlabel' id='lbl_Module6' onclick='changeModule(0)'>330[V] 30.3[A] 3.3[KW] </div>
+		<div class=menu_tt >DC/DC Converter</div><div class='vlabel_tt' >
+		</div>
+
+		<div class=menu_t1 >RED1</div><div class='vlabel' id='lbl_Module1' onclick='changeModule(0)'>
+		  <ul class=navbar_menu id=lbl_module1><li id=module_1_Vol>Input </li><li id=module_1_amp>330[V]</li><li>0.1[A]</li><li id=module_1_pow>3.3[KW]</li> </ul>
+		  <ul class=navbar_menu id=lbl_module1><li id=module_11_Vol>Output </li><li id=module_11_amp>330[V]</li><li>0.1[A]</li><li id=module_11_pow>3.3[KW]</li> </ul>
+		</div>
+		<div class=menu_t1 >RED2</div><div class='vlabel' id='lbl_Module2' onclick='changeModule(0)'>
+		  <ul class=navbar_menu id=lbl_module1><li id=module_2_Vol>Input </li><li id=module_2_amp>330[V]</li><li>0.1[A]</li><li id=module_2_pow>3.3[KW]</li> </ul>
+		  <ul class=navbar_menu id=lbl_module1><li id=module_22_Vol>Output </li><li id=module_22_amp>330[V]</li><li>0.1[A]</li><li id=module_22_pow>3.3[KW]</li> </ul>
+		</div>
+		<div class=menu_t1 >RED3</div><div class='vlabel' id='lbl_Module3' onclick='changeModule(0)'>
+		  <ul class=navbar_menu id=lbl_module1><li id=module_3_Vol>Input </li><li id=module_3_amp>330[V]</li><li>0.1[A]</li><li id=module_3_pow>3.3[KW]</li> </ul>
+		  <ul class=navbar_menu id=lbl_module1><li id=module_33_Vol>Output </li><li id=module_33_amp>330[V]</li><li>0.1[A]</li><li id=module_33_pow>3.3[KW]</li> </ul>
+		</div>
+		<div class=menu_t1 >RED4</div><div class='vlabel' id='lbl_Module4' onclick='changeModule(0)'>
+		  <ul class=navbar_menu id=lbl_module1><li id=module_4_Vol>Input </li><li id=module_4_amp>330[V]</li><li>0.1[A]</li><li id=module_4_pow>3.3[KW]</li> </ul>
+		  <ul class=navbar_menu id=lbl_module1><li id=module_44_Vol>Output </li><li id=module_44_amp>330[V]</li><li>0.1[A]</li><li id=module_44_pow>3.3[KW]</li> </ul>
+		</div>
+		<div class=menu_t1 >RED5</div><div class='vlabel' id='lbl_Module5' onclick='changeModule(0)'>
+		  <ul class=navbar_menu id=lbl_module1><li id=module_5_Vol>Input </li><li id=module_5_amp>330[V]</li><li>0.1[A]</li><li id=module_5_pow>3.3[KW]</li> </ul>
+		  <ul class=navbar_menu id=lbl_module1><li id=module_55_Vol>Output </li><li id=module_55_amp>330[V]</li><li>0.1[A]</li><li id=module_55_pow>3.3[KW]</li> </ul>
+		</div>
+		<div class=menu_t1 >RED6</div><div class='vlabel' id='lbl_Module6' onclick='changeModule(0)'>
+		  <ul class=navbar_menu id=lbl_module1><li id=module_6_Vol>Input </li><li id=module_6_amp>330[V]</li><li>0.1[A]</li><li id=module_6_pow>3.3[KW]</li> </ul>
+		  <ul class=navbar_menu id=lbl_module1><li id=module_66_Vol>Output </li><li id=module_66_amp>330[V]</li><li>0.1[A]</li><li id=module_66_pow>3.3[KW]</li> </ul>
+		</div>
+	</div>
+	<div class=converterdiv >
+
+		<div class=menu_tt >DC/AC Inverter</div><div class='vlabel_tt' >
+
+		</div>
+		<div class=menu_t1 >RED6</div><div class='vlabel' id='lbl_dcac' onclick='changeModule(0)'>
+		  <ul class=navbar_menu id=lbl_dcac><li id=dcac_Vol>Input </li><li id=dcac_amp>330[V]</li><li>0.1[A]</li><li id=dcac_pow>3.3[KW]</li> </ul>
+		  <ul class=navbar_menu id=lbl_dcac><li id=dcac_1_Vol>Input </li><li id=dcac_1_amp>330[V]</li><li>0.1[A]</li><li id=dcac_1_pow>3.3[KW]</li> </ul>
+		</div>
+
+		<div class="fieldsetButtonContainer" >
+		<fieldset ></fieldset>
+		</div>
+
+		<div class="divButtonContainer" >
+				<button class="button1" id="btnConnection"  onclick="onClickConnection()">Connection</button> 
+		</div>
+		<div class="divButtonContainer" >
+				<button  class="button1" onclick='btnSetTime()' >PC 시간 동기화</button> 
+		</div>
+		<div class="divButtonContainer" >
+				<button  class="button1" onclick='btnSave()' >Data Save</button> 
+		</div>
 	</div>
 
-<div class=converterdiv >
-	<div>
-		<div style="width: 200px;margin-left: 30%; ;">Voltage</div>
-		<div class="divImage" >
-			<canvas id="Volcanvasid" data-processing-sources="public/js/drawGraph.pde"/></canvas>
-		</div> 
-	</div>
-	<div>
-		<div style="width: 200px;margin-left: 30%; ">Current</div>
-		<div class="divImage" >
-			<canvas id="Ampcanvasid" data-processing-sources="public/js/drawGraph.pde"/></canvas> </div> 
-		</div>
-	<div>
-		<div style="width: 200px;margin-left: 30%; ">Power</div>
-		<div class="divImage" >
-			<canvas id="Powcanvasid" data-processing-sources="public/js/drawGraph.pde"/></canvas>
-		</div> 
-	</div>
-	<div class="divButtonContainer" >
-		<div class="Divbutton1">
-			<button class="button1" style="width:150px;">전 체</button> 
-			<button  class="button1" onClick='showDetail()' style="width:150px;">개 별</button> <br>
-			<button  class="button1" id=refreshTime style="width:311px;" onclick="changeReflashTime()">Div : 1 sec</button> 
-		</div>
-	</div>
-</div>
-<div class=converterdiv >
-	<table style="margin-left: 50px;" >
-	<tr> <td align="center">DC/AC Inverter</td> </tr>
-	<tr height=60px> <td ><label class="vlabel" id=lbl_acdc >V:330.3[V] V:330.3[V] V:330.3[V] </label></td> </tr>
-	</table>
+</div><!--  Main Container Div end-->
 
-	<div>
-		<div style="width: 200px;margin-left: 30%; "><label id='sellblId' >Voltage & Current</label> </div>
-		<div class="divImage" >
-			<canvas id="AcDcVolcanvasid" data-processing-sources="public/js/drawGraph.pde"/></canvas>
-		</div>
-	</div>
-	<br>
-	<div class="divImage" >
-			<canvas id="AcDcAmpcanvasid" data-processing-sources="public/js/drawGraph.pde"/></canvas>
-	</div>
-	<div class="divButtonContainer" >
-		<div class="Divbutton1">
-		<select id="option" class="disSelect" onchange="SelectChange()">
-		  <option value="PC">Power & Current</option>
-		  <option value="PV">Power & Voltage</option>
-		  <option value="VC" selected>Voltage & Current</option>
-		</select>
-		</div>
-	</div>
-	<div class="divButtonContainer" >
-		<div class="Divbutton1" style="width:340px;">
-			<button class="button1" id="btnConnection" style="margin-left: 15px;width:150px;" onclick="onClickConnection()">Connection</button> 
-			<button  class="button1" onclick='btnSave()' style="width:150px;">Data Save</button> <br>
-		</div>
-	</div>
-</div>
-</div><!--end container -->
-	<!-- 
-	<table>
-	<tr> <td ></td> <td align="center">DC/DC Converter</td> </tr>
-	<tr> <td>RED1 </td> <td><label class="vlabel" id=lbl_Module1 onclick="changeModule(0)">330[V] 30.3[A] 3.3[KW] </label>
-			                <label class="vlabel" id=lbl_Module1 onclick="changeModule(0)">330[V] 30.3[A] 3.3[KW] </label></td> </tr>
-	<tr> <td>RED2 </td> <td><label class="vlabel" id=lbl_Module2 onclick="changeModule(1)">330[V] 30.3[A] 3.3[KW] </label></td> </tr>
-	<tr> <td>RED3 </td> <td><label class="vlabel" id=lbl_Module3 onclick="changeModule(2)" >330[V] 30.3[A] 0.3[KW] </label></td> </tr>
-	<tr> <td>RED4 </td> <td><label class="vlabel" id=lbl_Module4 onclick="changeModule(3)" >330[V] 30.3[A] 0.3[KW] </label></td> </tr>
-	<tr> <td>RED5 </td> <td><label class="vlabel" id=lbl_Module5 onclick="changeModule(4)" >330[V] 30.3[A] 0.3[KW] </label></td> </tr>
-	<tr> <td>RED6 </td> <td><label class="vlabel" id=lbl_Module6 onclick="changeModule(5)" >330[V] 30.3[A] 0.3[KW] </label></td> </tr>
-	</table>
-	-->	
-
-
+<!--  Footer start 
 <div class=footer>
 <p>
 <hr style="position:absolute;boder:outset 5px black; background-color:black;color:orange;height:3px;width:1400px">
@@ -111,6 +85,7 @@
 <small style=" margin-left: 150px;" > <small>mvchkim@gmailcom</small></small>
 <small style=" margin-left: 150px;" > <small>tel:032-000-0000</small></small>
 </p>
+-->
 <script type="text/javascript">
 //var myData =  !{JSON.stringify(data)};
 </script>

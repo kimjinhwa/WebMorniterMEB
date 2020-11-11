@@ -1,46 +1,133 @@
 body{
-
 }
 .container{
 	display:flex;
 	flex-flow:row nowrap;
 	width:1450px;
-	height:700px;
-	border: 3px outset gray;
+	height:850px;
+	//border: 3px outset gray;
 	align-content:space-between;
 	padding: 20px 10px;
 }
 .menu {
   display:flex;
   flex-flow:row wrap;
-  //grid-template-columns:20% 80%;
   flex-direction:row;
   flex-wrap:wrap;
-  //margin-left: 5px;
-  border: 3px outset blue;
+  width:50%;
+  //border: 3px outset blue;
   background-color: white;
-  height: 550px;
-  //width: 750px;
-  //float: left;
   font-size: 25px;
-  //line-height: 200%
   margin: 10px 10px;
   padding: 30px 10px;
+  //line-height: 200%
+  //height: 550px;
+  //width: 750px;
+  //float: left;
+  //margin-left: 5px;
+}
+.menu_tt{
+  font-size: 30px;
+  text-align: center;
+  display:flex;
+  align-items: center;
+  //width:160px;
+  width:85%;
+  height:40px;
+  padding: 5px 0px 5px 20px;
+  margin: 5px 0px;
+  color: black;
+  background-color: #ffffff;
+  justify-content:space-between;
+  text-align: center;
+  //border: 3px outset blue;
+}
+.vlabel_tt {
+  display:flex;
+  flex-flow:row wrap;
+  flex-direction:row;
+  flex-wrap:wrap;
+  align-items: center;
+  text-align: left;
+  //width:480px;
+  width:5%;
+  height:40px;
+  color: white;
+  background-color: #ffffff;
+  //background-color: #000000;
+  padding: 5px 5px;
+  margin: 5px 0px;
+  justify-content:space-between;
 }
 .menu_t1{
-	width:10%;
-  padding: 1px 20px;
-  margin: 5px 5px;
+  text-align: center;
+  display:flex;
+  align-items: center;
+  //width:160px;
+  width:15%;
+  height:110px;
+  padding: 5px 0px 5px 20px;
+  margin: 5px 0px;
+  color: white;
+  background-color: #000000;
+  justify-content:space-between;
+  text-align: center;
 }
 .vlabel {
-	width:75%;
-  //display: block;
-  //width: 350px;
-  //border: 1px outset gray;
-  background-color: #deeeff;
-  //margin-left: 10px ;
-  /padding: 2px 20px;
-  //box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display:flex;
+  flex-flow:row wrap;
+  flex-direction:row;
+  flex-wrap:wrap;
+  align-items: center;
+  text-align: left;
+  //width:480px;
+  width:75%;
+  height:110px;
+  color: white;
+  //background-color: #0fffff;
+  background-color: #000000;
+  padding: 5px 5px;
+  margin: 5px 0px;
+  justify-content:space-between;
+}
+.converterdiv {
+  display:flex;
+  flex-flow:row wrap;
+  flex-direction:row;
+  flex-wrap:wrap;
+  width:50%;
+  //border: 3px outset blue;
+  background-color: white;
+  font-size: 25px;
+  margin: 10px 10px;
+  padding: 30px 10px;
+  //line-height: 200%
+  //height: 550px;
+  //width: 750px;
+  //float: left;
+  //margin-left: 5px;
+}
+.fieldsetButtonContainer {
+  display:flex;
+  flex-flow:row wrap;
+  flex-direction:row;
+  flex-wrap:wrap;
+  //position: relative;
+  //border: 1px outset red;
+  width: 100%;
+  height: 400px;
+  font-size: 25px;
+}
+.divButtonContainer {
+  display:flex;
+  flex-flow:row wrap;
+  flex-direction:row;
+  flex-wrap:wrap;
+  //position: relative;
+  //border: 1px outset red;
+  width: 100%;
+  height: 80px;
+  font-size: 25px;
 }
 .divHead {
   width: 1450px;
@@ -48,14 +135,34 @@ body{
   height: 100px;
 }
 div.left {
-  width: 1100px;
+  width: 260px;
   float: left;
+  font-size: 35px;
   box-sizing: border-box;
   background: white;
-  background-color: lightblue;
+  //background-color: lightblue;
+  background-color: white;
   text-align: center;
   height: 100px;
   border: 0px outset red;
+  padding: 20px 10px 10px 10px;
+}
+div.middle{
+  width: 700px;
+  float: left;
+  box-sizing: border-box;
+  background: white;
+  //background-color: lightblue;
+  background-color: white;
+  text-align: center;
+  height: 100px;
+  border: 0px outset red;
+  padding: 40px 10px 10px 10px;
+  font-size: 40px;
+  font-family:Sans-Serif;
+  font-weight:900;
+  text-shadow:4px 2px 2px gray;
+  color:#3D5679
 }
 div.right {
   width: 350px;
@@ -66,6 +173,7 @@ div.right {
   //valign: center;
   height: 100px;
   border: 0px outset red;
+  padding: 40px 0px 0px 0px;
 }
 div.divImage {
   //border: 1px outset gray;
@@ -81,6 +189,7 @@ div.divImage {
   font-size: 25px;
   //line-height:200%";
 }
+
 .sineimg {
   width: 100%;
   height: 90%;
@@ -90,26 +199,18 @@ div.divImage {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 60%;
-  height: 100px;
+  //width: 60%;
+  //height:60%;
+  //height: 100px;
   vertical-align: baseline;
-  height: 100px;
-}
-.converterdiv {
-  //display:flex;
-  border: 0px outset red;
-  width: 500px;
-  height: 650px;
-  float: left;
-  font-size: 25px;
-  align: righ;
+  //height: 100px;
 }
 .menudiv {
   border: 0px outset red;
   background-color:white;
   height:650px;width:450px;
   float:left;font-size:25px;
-  line-height:200%";
+  //line-height:200%";
 }
 .footer {
   margin-left: 5px;
@@ -120,14 +221,7 @@ div.divImage {
   font-size: 25px;
   align: righ;
 }
-.divButtonContainer {
-  position: relative;
-  border: 0px outset red;
-  width: 500px;
-  height: 80px;
-  border: 0px outset red;
-  font-size: 25px;
-}
+/*
 .Divbutton1 {
   position: absolute;
   margin-top: 20px;
@@ -137,11 +231,18 @@ div.divImage {
   transform: translate(-50%, -30%);
   border: 0px outset red;
 }
+*/
+fieldset {
+	height: 200px;
+	border: 0px outset red;
+	}
 .button1 {
-  display: inline-block;
-  background-color: #4caf50;
+  //display: inline-block;
+  //display:flex;
+  width:100%;
+  background-color: #ffffff;
   padding: 16px 16px;
-  color: white;
+  color: #000000;
   text-align: center;
   text-decoration: none;
   font-size: 20px;
@@ -156,6 +257,7 @@ div.divImage {
   padding: 6px 16px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 td {
   height: 60px;
   padding: 2px 1px;
@@ -164,11 +266,7 @@ td {
   height: 60px;
   padding: 6px 16px;
 }
-#tdSum {
-  ivbutton1 {
-  height: 100px;
-  width: 300px;
-}
+
 .detailLabel {
   font-size: 50px;
   color: aliceblue;
@@ -176,6 +274,7 @@ td {
   padding: 6px 16px;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 .detailSLabel {
   padding: 16px 16px;
   font-size: 60px;
@@ -184,3 +283,26 @@ td {
   padding: 26px 26px;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.navbar_menu{
+	margin: 0 0 ;
+	padding: 0 0 ;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  //background-color: #b4b9f3;
+  //color: aliceblue;
+  list-style:none;
+  height:10px;
+	//border: 3px outset gray;
+}
+li{
+    text-align: right;
+	//border: 3px outset gray;
+	height: 20px;
+	width: 90px;
+	margin: 10px 10px;
+	padding : 10px 0 ;
+}
+
+
