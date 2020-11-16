@@ -14,6 +14,16 @@ function btnSave(){
 	console.log('btn click');
 	window.open("ftp://"+location.hostname,'file down load');
 }
+
+function btnDelete()
+{
+    if( confirm("전체 로그를 삭제 합니다 \r\n\r\n실행 하시겠습니까? " )	)
+	{
+		request.open('GET', "./command?command=delete");
+		request.responseType = 'json';
+		request.send();
+	}
+}
 function btnSetTime(){
 	console.log('btn click');
 	let nowTime = new Date();
@@ -37,8 +47,20 @@ function requestJSONData(){
 	request.responseType = 'json';
 	request.send();
 }
+var rdata;
 request.onload = function(){
+	//console.log("onLoad="+request.response);
+	rdata = request.response;	
+	if(rdata.rep != null)
+	{
+		console.log("rdata = " + rdata.rep);
+		if(rdata.rep == 'error') alert("파일이 없거나 에러가 발생했습니다");
+		if(rdata.rep == 'deleted') alert("삭제 했습니다.");
+		return;
+	}
+
 	UpsData= request.response;
+	if(UpsData == null) return;
 	setDatatoIndex();
 	//setProcessingInstance();
 	if(isConnectionButtonPressed)

@@ -279,6 +279,34 @@ router.get('/', function(req, res, next) {
 router.get('/detail', function(req, res, next) {
     res.render('detail', {data : 'index testData list ejsk'});
 });
+
+router.get('/command', function(req, res, next) {
+	var rComm = req.param("command");
+	var rdata={'rep':'deleted'};
+	if(rComm == 'delete'){
+		console.log('Delete command requested');
+		exec("sudo rm /srv/ftp/* ",(error,stdout,stderr) => {
+			if(error){
+				console.log('stdout: ${error}'+ error);
+				res.type("text/json");
+				rdata.rep = 'error';
+				res.send(rdata);
+				return;
+			}
+			if(stderr){
+				console.log('stdout: ${stderr}');
+				res.type("text/json");
+				rdata.rep = 'error';
+				res.send(rdata);
+				return;
+			}
+			console.log('stdout: ${stdout}'+stdout);
+			res.type("text/json");
+			res.send(rdata);
+
+		});
+	}
+});
 router.get('/setTime', function(req, res, next) {
     //res.render('detail', {data : 'index testData list ejsk'});
 	var rTime = req.param("time");
