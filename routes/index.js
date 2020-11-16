@@ -284,25 +284,25 @@ router.get('/setTime', function(req, res, next) {
 	var rTime = req.param("time");
 	var today = new Date(rTime);
 	//exec(`date -s "${dateFormat(dateTime, 'mm/dd/yyyy HH:MM:ss')}" --utc`);
-	var command = "sudo date -s '";
-	command += today.getDate();
-	command +='/'; 
-	command += today.getMonth();
-	command +='/'; 
-	command += today.getFullYear();
+	var command = "sudo timedatectl set-time '";
+	command += today.getUTCFullYear();
+	command +='-'; 
+	command += today.getUTCMonth()+1;
+	command +='-'; 
+	command += today.getUTCDate();
 	command +=' '; 
-	command += today.getHours();
+	command += today.getUTCHours();
 	command +=':'; 
-	command += today.getMinutes();
+	command += today.getUTCMinutes();
 	command +=':'; 
-	command += today.getSeconds();
-	command +=" utc'"; 
+	command += today.getUTCSeconds();
+	command +=" KST'";//utc 
 	console.log(rTime);
 	console.log(today);
 	console.log(command);
 	exec(command,(error,stdout,stderr) => {
 		if(error){
-			console.log('stdout: ${error}');
+			console.log('stdout: ${error}'+ error);
 			return;
 		}
 		if(stderr){
